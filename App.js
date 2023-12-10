@@ -1,11 +1,18 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import AppNavigator from './src/Navigation/AppNavigation';
+import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './src/Utils/store'; 
 
 const App = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 3000);
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
