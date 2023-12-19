@@ -1,25 +1,58 @@
-import React , { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import AppNavigator from './src/Navigation/AppNavigation';
-import SplashScreen from 'react-native-splash-screen';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './src/Utils/store'; 
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Registration from './src/authentication/Registration';
+import Login from './src/authentication/Login';
+import OtpScreen from './src/authentication/OtpScreen';
+import Onboarding from './src/screens/onboardingscreens/Onboarding';
+import Onboard from './src/screens/onboardingscreens/Onboard';
+import Welcome from './src/screens/welcome/Welcome';
+import Splash from './src/screens/splash/Splash';
 
-const App = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 3000);
-  }, []);
+const Stack = createStackNavigator();
 
+function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppNavigator />
-      </PersistGate>
-    </Provider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Registration"
+          component={Registration}
+          options={{ title: "Back" }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ title: "Back" }}
+        />
+         <Stack.Screen
+          name="OtpScreen"
+          component={OtpScreen}
+          options={{ title: "Back" }}
+        />
+          <Stack.Screen
+          name="Onboarding"
+          component={Onboarding}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Onboard"
+          component={Onboard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
 export default App;
