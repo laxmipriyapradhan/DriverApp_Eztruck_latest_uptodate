@@ -17,7 +17,7 @@ const OtpScreen = ({route}) => {
 
   const login = async () => {
     try {
-      const url = 'http://13.200.75.208:4001/v1/users/login';
+      const url = 'http://13.200.75.208:4001/driver/login';
       const data = {
         mobile_number: 'your_phone_number', // replace with the actual phone number
       };

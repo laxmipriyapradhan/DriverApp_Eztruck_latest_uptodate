@@ -18,8 +18,8 @@ const Onboarding = () => {
   const slides = [
     {
       id: 1,
-      title: "eZTruck",
-      description:"Effortlessly book reliable mini trucks for all your logistics needs with our user-friendly app",
+      title: "eZTruck Partner",
+      description:"Effortlessly book relaible mini trucks for all your logistics needswith our user-friendly app",
       image: require("../../../assets/tracking_logo.png"),
       width: "60%",
       height: "50%",

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Onboarding from './Onboarding';
+// import Login from '../../authentication/Login';
 
 
 
@@ -10,7 +11,7 @@ const Onboard = () => {
 
   const handleOnboardingComplete = () => {
     // Navigate to the welcome screen (adjust the navigation logic based on your setup)
-    navigation.navigate('Welcome');
+    navigation.navigate('Onboarding');
     // setShowOnboarding(false);
   }
 //   const handleOnboardingComplete = () => {
