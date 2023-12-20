@@ -73,41 +73,24 @@ const Registration = ({ navigation }) => {
     setIsFormValid(Object.keys(errors).length === 0);
   };
 
+  const renderError = (fieldName) => {
+    return errors[fieldName] && <Text style={styles.errorText}>{errors[fieldName]}</Text>;
+  };
+
+  
+  
  
-  // const handleSignUp = async () => {
-  //   const driverData = {
-  //     email: 'aaa@gmail.com',
-  //     driver_name: 'aaaa',
-  //     mobile_number: '+916545342432',
-  //     password: 'Aaa@12345',
-  //   };
   
-  //   try {
-  //     console.log(driverData);
-  //     const response = await axios.post(
-  //       'https://fexmy.co/v1/drivers/signUp',
-  //       driverData,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           Accept: 'application/json',
-  //         },
-          
-  //       },
-  //     );
-  
-  //     console.log('response', response.data);
-  
-  //     // Successful registration
-  //     Alert.alert('Sign Up Success', 'driver registered successfully!');
-  //     // You may navigate to another screen or perform additional actions here
-  //   } catch (error) {
-  //     console.error('API request failed', error);
-  //     Alert.alert('Error', 'An error occurred while processing your request');
-  //   }
-  // }
 
   const handleSignUp = async () => {
+
+
+    
+      // Check if the form is valid before submitting
+      if (!isFormValid) {
+        Alert.alert('Error', 'Please fill all the fields correctly.');
+        return;
+      }
     const driverData = {
       email: email,
       Name: name ,
