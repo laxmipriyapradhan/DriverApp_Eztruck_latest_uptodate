@@ -1,13 +1,17 @@
 
 import { useState, useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 
 import MapView, { Marker } from 'react-native-maps';
 import {GOOGLE_MAPS_APIKEY} from '../utils/Constants'
 import MapViewDirections from 'react-native-maps-directions';
 import imagePath from '../utils/imagePath';
 
-const Home = () => {
+
+
+const Home = ({navigation}) => {
+   
 
    
     const [locationPoints, setlocationPoints] = useState(
@@ -28,8 +32,15 @@ const Home = () => {
     )
         const mapRef =useRef()
     const { pickupCords, droplocationCords } = locationPoints
+
+    const onPressLocation =()=>{
+      
+        navigation.navigate("ChooseLocation")
+     
+    }
     return (
         <View style={styles.container}>
+            <View style={{flex:1}}>
             <MapView
             ref={mapRef}
                 style={StyleSheet.absoluteFill}
@@ -59,6 +70,20 @@ const Home = () => {
 
 
             </MapView>
+            </View>
+
+            <View style ={styles.bottomCard}>
+                <Text>Where are you going today?</Text>
+                  <TouchableOpacity
+                    style={styles.inputStyle}
+                    onPress={onPressLocation} 
+                    >
+
+                        <Text>From Where</Text>
+                        </TouchableOpacity>
+
+                   
+            </View>
 
 
 
@@ -69,6 +94,23 @@ const Home = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    bottomCard :{
+        backgroundColor: "White",
+        Width: '100%',
+        padding: 30,
+        borderTopRadius: 24,
+        borderTopRadius: 24,
+    },
+    inputStyle:{
+
+        backgroundColor: "White",
+        borderRadius: 4,
+        borderWidth: 1,
+        alignItems: 'center',
+        height:48,
+        justifyContent: 'center',
+        marginTop: 16
     }
 
 })

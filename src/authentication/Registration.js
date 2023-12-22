@@ -116,14 +116,24 @@ const Registration = ({ navigation }) => {
     // Check the status code of the response
     if (response.status === 201) {
       // Successful registration
-      Alert.alert('Sign Up Success', 'Customer registered successfully!');
+      Alert.alert('Sign Up Success', 'Customer registered successfully! Please login',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]
+      );
+    
+      console.log("response", response);
       // You may navigate to another screen or perform additional actions here
     } else {
       // Handle other status codes
       console.error('Unexpected status code', response.status);
       Alert.alert(
         'Error',
-        'An error occurred while processing your request. Please try again.'
+        'An error occurred while processing your request. Please try again.',
+      
       );
     }
   } catch (error) {
@@ -134,8 +144,15 @@ const Registration = ({ navigation }) => {
       // User already exists, provide guidance
       Alert.alert(
         'User Exists',
-        'Mobile number already registered. Log in or use another number (e.g., +91 XXXXXXXXXX).'
+        'Mobile number already registered. Log in or use another number (e.g., +91 XXXXXXXXXX).',
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ]
       );
+    
     } else {
       // Handle other errors
       Alert.alert('Error', 'An error occurred while processing your request.');

@@ -43,7 +43,7 @@ function App() {
           component={Home}
           options={{ title: "Back" }}
         />
-         {/* <Stack.Screen
+         <Stack.Screen
           name="ChooseLocation"
           component={ChooseLocation}
           options={{ title: "Back" }}
@@ -52,7 +52,7 @@ function App() {
           name="ChooseDestination"
           component={ChooseDestination}
           options={{ title: "Back" }}
-        /> */}
+        />
 
           <Stack.Screen
           name="Onboarding"

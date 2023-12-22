@@ -46,7 +46,16 @@ const OtpScreen = ({ route }) => {
         console.log('Response Data:', responseData);
 
         if (responseData.hasOwnProperty('message') && responseData.message === 'OTP verified success') {
-          Alert.alert('OTP Verification Successful');
+          Alert.alert('OTP Verification Successful',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                setIsVerified(true);
+                navigation.navigate('Home');
+              },
+            },
+          ]);
           setIsVerified(true);
           navigation.navigate('Home');
         } else {
