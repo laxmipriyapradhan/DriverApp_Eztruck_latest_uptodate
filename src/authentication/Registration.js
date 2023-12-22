@@ -97,6 +97,7 @@ const Registration = ({ navigation }) => {
       mobile_number: mobileNumber,
       password: password,
     };
+
   
  
 // http://13.200.75.208:4001/driver/signUp
@@ -105,6 +106,7 @@ try {
   console.log("driverData", driverData);
   const response = await axios.post(
     'http://13.200.75.208:4001/driver/signUp',
+
     driverData,
     {
       headers: {
