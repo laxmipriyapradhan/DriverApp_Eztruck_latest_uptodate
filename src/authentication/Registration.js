@@ -120,8 +120,16 @@ try {
 
   // Check the status code of the response
   if (response.status === 201) {
-    // Successful registration
-    Alert.alert('Sign Up Success', 'driver registered successfully!');
+   
+    Alert.alert('Sign Up Success', 'driver registered successfully! Please login',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]
+      );
+
     // You may navigate to another screen or perform additional actions here
   } else {
     // Handle other status codes
@@ -139,7 +147,13 @@ try {
     // Driver already exists, provide guidance
     Alert.alert(
       'Driver Exists',
-      'Mobile number already registered. Log in or use another number (e.g., +91 XXXXXXXXXX).'
+      'Mobile number already registered. Log in or use another number (e.g., +91 XXXXXXXXXX).',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]
     );
   } else {
     // Handle other errors

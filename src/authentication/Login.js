@@ -21,87 +21,146 @@ const Login = ({navigation}) => {
     );
   };
 
+  // const sendOtp = async () => {
+
+    
+  //   const customerData = {
+  //     email: "demo@gmail.com",
+  //     Name: "demo" ,
+  //     mobile_number: `+91${phoneNumber}`,
+  //     password: "Demo@12345",
+  //   };
+
+  //   console.log(customerData,"customerData");
+
+    
+
+  //   try {
+  //     const response = await axios.post(
+  //       'http://13.200.75.208:4001/driver/signUp',
+  //       customerData,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Accept: 'application/json',
+  //         },
+  //       }
+  //     );
+  //     console.log("response",response);
+  //     if (response.data){
+  //       navigation.navigate("Registration")
+  //     }
+    
+  //     // Handle the response or do something with it if needed
+    
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 400) {
+  //       const url = `https://control.msg91.com/api/v5/otp?template_id=646b0553d6fc0550857a9702&mobile=91${phoneNumber}`;
+    
+  //       try {
+  //         const otpResponse = await fetch(url, {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             authkey: "395607ATzxdWwee644b4b4bP1", // replace with your Msg91 key
+  //           },
+  //         });
+    
+  //         if (otpResponse.ok) {
+  //           navigation.navigate("OtpScreen", { phoneNumber: phoneNumber });
+  //           console.log("OTP Sent:", await otpResponse.json());
+  //         } else {
+  //           console.error("Error sending OTP:", otpResponse.status);
+  //         }
+  //       } catch (otpError) {
+  //         console.error("Error sending OTP:", otpError);
+  //         navigation.navigate("Registration");
+  //       }
+  //     } else {
+  //       // Handle other types of errors
+  //       console.error('An error occurred during the request:', error);
+  //       navigation.navigate("Registration");
+  //     }
+  //   }
+    
+    
+    
+
+    
+
+    
+  // };
+
   const sendOtp = async () => {
-
-    
     const customerData = {
-      email: "demo@gmail.com",
-      Name: "demo" ,
-      mobile_number: `+91${phoneNumber}`,
-      password: "Demo@12345",
-    };
+     
+     mobile_number: `+91${phoneNumber}`
+    
+   };
 
-    console.log(customerData,"customerData");
 
-    // const response = await axios.post(
-    //   'http://13.200.75.208:4001/v1/users/signUp',
-    //   customerData,
-    //   {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Accept: 'application/json',
-    //     },
-    //   }
-    // );
+   try {
+     const response = await axios.post(
+       'http://13.200.75.208:4001/v1/users/login',
+       customerData,
+       {
+         headers: {
+           'Content-Type': 'application/json',
+           Accept: 'application/json',
+         },
+       }
+     );
+     // console.log("response",response);
+     
+     if (response.data){
+       console.log("response.data", response.data);
+       dispatch(registerSuccess(response.data))
+     
+       
+
+       const url = `https://control.msg91.com/api/v5/otp?template_id=646b0553d6fc0550857a9702&mobile=91${phoneNumber}`;
+   
+       try {
+         const otpResponse = await fetch(url, {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             authkey: "395607ATzxdWwee644b4b4bP1", // replace with your Msg91 key
+           },
+         });
+         
+         
+         if (otpResponse.ok) {
+           // console.log("response.data1234", response.data);
+           // console.log("response?.data?.authTokens", response?.data?.__v?.authTokens);
+           navigation.navigate("OtpScreen", { phoneNumber: phoneNumber }, {authTokens:response?.data?.authTokens});
+           // console.log("OTP Sent:", await otpResponse.json());
+         } else {
+           console.error("Error sending OTP:", otpResponse.status);
+         }
+       } catch (otpError) {
+         console.error("Error sending OTP:", otpError);
+       
+       }
+       
+       
+     }
+   
+     // Handle the response or do something with it if needed
+   
+   } catch (error) {
+     if (error.response && error.response.status === 400) {
+       navigation.navigate("Registration")
+       
+     } else {
+       // Handle other types of errors
+       console.error('An error occurred during the request:', error);
+     
+     }
+   }
+  }
   
-    // console.log('response', response.data);
-
-    try {
-      const response = await axios.post(
-        'http://13.200.75.208:4001/driver/signUp',
-        customerData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-        }
-      );
-      console.log("response",response);
-      if (response.data){
-        navigation.navigate("Registration")
-      }
-    
-      // Handle the response or do something with it if needed
-    
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        const url = `https://control.msg91.com/api/v5/otp?template_id=646b0553d6fc0550857a9702&mobile=91${phoneNumber}`;
-    
-        try {
-          const otpResponse = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              authkey: "395607ATzxdWwee644b4b4bP1", // replace with your Msg91 key
-            },
-          });
-    
-          if (otpResponse.ok) {
-            navigation.navigate("OtpScreen", { phoneNumber: phoneNumber });
-            console.log("OTP Sent:", await otpResponse.json());
-          } else {
-            console.error("Error sending OTP:", otpResponse.status);
-          }
-        } catch (otpError) {
-          console.error("Error sending OTP:", otpError);
-          navigation.navigate("Registration");
-        }
-      } else {
-        // Handle other types of errors
-        console.error('An error occurred during the request:', error);
-        navigation.navigate("Registration");
-      }
-    }
-    
-    
-    
-
-    
-
-    
-  };
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login with OTP</Text>
