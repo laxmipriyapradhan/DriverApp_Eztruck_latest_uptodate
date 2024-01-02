@@ -53,7 +53,7 @@ const OtpScreen = ({navigation, route }) => {
               text: 'OK',
               onPress: () => {
                 setIsVerified(true);
-                navigation.navigate('Home');
+                navigation.navigate('HomeScreen');
               },
             },
           ]);
@@ -74,7 +74,7 @@ const OtpScreen = ({navigation, route }) => {
               text: 'OK',
               onPress: () => {
                 setIsVerified(true);
-                navigation.navigate('Home');
+                navigation.navigate('HomeScreen');
               },
             },
           ]);
