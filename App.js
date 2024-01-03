@@ -10,6 +10,8 @@ import Welcome from './src/screens/welcome/Welcome';
 // import Splash from './src/screens/splash/Splash';
 import HomeScreen from './src/screens/home/HomeScreen';
 import SplashScreen from 'react-native-splash-screen'
+import ArrivedScreen from './src/screens/home/ArrivedScreen';
+import DropOffScreen from './src/screens/home/DropOffScreen';
 const Stack = createStackNavigator();
 
 
@@ -23,7 +25,7 @@ function App() {
   }, []);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
+      <Stack.Navigator initialRouteName="Onboarding">
         <Stack.Screen
           name="Registration"
           component={Registration}
@@ -57,6 +59,16 @@ function App() {
          <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArrivedScreen"
+          component={ArrivedScreen}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="DropOffScreen"
+          component={DropOffScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
