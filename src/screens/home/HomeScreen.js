@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import NewOrder from '../orders/NewOrder';
 
 const HomeScreen = () => {
-
+  const navigation = useNavigation();
   //function for online /ofline
   const [isOnline, setIsOnline] = useState(false)
   const onSwitchPress = () => {
@@ -134,7 +134,7 @@ const onAccept=(newBook)=>{
             <Text style={styles.buttonText}>Wallet</Text>
           </Pressable>
           <Pressable style={buttonStyles.yourRideButton}>
-            <Text style={styles.buttonText}>Your Ride</Text>
+            <Text style={styles.buttonText} onPress={()=>navigation.navigate('ArrivedScreen')}>Your Ride</Text>
           </Pressable>
         </View>
       </View>
