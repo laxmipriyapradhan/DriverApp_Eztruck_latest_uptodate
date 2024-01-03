@@ -25,7 +25,7 @@ function App() {
   }, []);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Onboarding">
+      <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen
           name="Registration"
           component={Registration}
@@ -77,40 +77,3 @@ function App() {
 }
 
 export default App;
-// import React from "react";
-// import { StyleSheet, Text, View } from "react-native";
-// import SplashScreen from 'react-native-splash-screen'
-// import MapView from "react-native-maps";
-
-
-
-// export default function App() {
-//   SplashScreen.hide();
-//   return (
-//     <View style={styles.container}>
-//     {/*Render our MapView*/}
-//       <MapView
-//         style={styles.map}
-//         //specify our coordinates.
-//         initialRegion={{
-//           latitude: 37.78825,
-//           longitude: -122.4324,
-//           latitudeDelta: 0.0922,
-//           longitudeDelta: 0.0421,
-//         }}
-//       />
-//     </View>
-//   );
-// }
-// //create our styling code:
-// const styles = StyleSheet.create({
-//   container: {
-//     ...StyleSheet.absoluteFillObject,
-//     flex: 1, //the container will fill the whole screen.
-//     justifyContent: "flex-end",
-//     alignItems: "center",
-//   },
-//   map: {
-//     ...StyleSheet.absoluteFillObject,
-//   },
-// });

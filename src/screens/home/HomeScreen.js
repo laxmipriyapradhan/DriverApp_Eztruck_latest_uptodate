@@ -1,18 +1,40 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Pressable, StyleSheet, Text, View, Modal, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Modal, Image, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
 import Homemap from '../../map/Homemap';
 import { useNavigation } from '@react-navigation/native'
+import NewOrder from '../orders/NewOrder';
 
 const HomeScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const navigation = useNavigation();
-  const openModal = () => {
-    setModalVisible(true);
-  };
-  const closeModal = () => {
-    setModalVisible(false);
-  };
+
+  //function for online /ofline
+  const [isOnline, setIsOnline] = useState(false)
+  const onSwitchPress = () => {
+    setIsOnline(!isOnline)
+  }
+//useSome Dummy Bookings to show in popup 
+const[book,setBook]=useState({
+
+})
+const [newBook,setNewBook]=useState({
+  id:'1',
+  type:'Dala Auto',
+ 
+  originLatitude:37.78825,
+  originLongitude: -122.4324,
+
+  destLatitude:37.78825,
+  destLongitude:-122.4324,
+
+})
+const onDeCline=()=>{
+  setNewBook(null)
+}
+const onAccept=(newBook)=>{
+  setBook(newBook)
+}
+
+////Styles for homeScreen
   const colors = {
     primary: '#EE272E',
     secondary: '#EE272E',
@@ -46,50 +68,7 @@ const HomeScreen = () => {
       width: 104,
     },
   };
-  const modalStyles = {
-    modalContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalContent: {
-      backgroundColor: colors.background,
-      padding: 20,
-      borderRadius: 20,
-      height: 400,
-      width: 340,
-    },
-    titleText: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 10,
-      color: colors.secondary,
-      textAlign: 'center'
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    acceptButton: {
-      backgroundColor: 'green',
-      padding: 10,
-      borderRadius: 30,
-      flex: 1,
-      marginRight: 5,
-    },
-    cancelButton: {
-      backgroundColor: '#EE272E',
-      padding: 10,
-      borderRadius: 30,
-      flex: 1,
-      marginLeft: 5,
-    },
-    buttonText: {
-      color: 'white',
-      textAlign: 'center',
-    },
-  };
+
   const imageStyles = {
     profilePhoto: {
       width: 60,
@@ -103,15 +82,34 @@ const HomeScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <TouchableOpacity
-          // onPress={() => navigation.toggleDrawer()}
-          style={styles.menu}
-        >
-          <Icon name="menu" size={35} color="white" />
-        </TouchableOpacity>
-      </View>
+
       <Homemap />
+      <Pressable
+        // onPress={() => navigation.toggleDrawer()}
+        style={[styles.onlineBtn]}
+        onPress={onSwitchPress}
+      >
+        {
+          isOnline
+            ? <Text style={styles.BalnceText}>Online</Text>
+            : <Text style={styles.BalnceText}>Offline</Text>
+        }
+
+
+      </Pressable>
+      <Pressable
+        // onPress={() => navigation.toggleDrawer()}
+        style={[styles.menu, { top: 10, left: 10 }]}
+      >
+        <Icon name="menu" size={35} color="white" />
+      </Pressable>
+
+
+      <Pressable
+        style={[styles.roundBtn, { top: 10, right: 10 }]}
+      >
+        <Icon name="person" size={35} color="white" />
+      </Pressable>
       <View style={styles.bottomSheetContainer}>
         <View style={styles.profileContainer}>
           <Image
@@ -135,49 +133,16 @@ const HomeScreen = () => {
           <Pressable style={buttonStyles.walletButton}>
             <Text style={styles.buttonText}>Wallet</Text>
           </Pressable>
-          <Pressable onPress={openModal} style={buttonStyles.yourRideButton}>
+          <Pressable style={buttonStyles.yourRideButton}>
             <Text style={styles.buttonText}>Your Ride</Text>
           </Pressable>
         </View>
       </View>
-      {/* Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={closeModal}>
-        <View style={modalStyles.modalContainer}>
-          {/* First container with map and loader */}
-
-
-          {/* Second container with title and buttons */}
-          <View style={modalStyles.modalContent}>
-            <View style={{ height: 200 }}>
-              <Homemap />
-            </View>
-            {/* Title */}
-            <Text style={modalStyles.titleText}>Ride Request</Text>
-
-            {/* Text under the title */}
-            <Text style={{ textAlign: 'center', marginBottom: 40 }}>This is your ride details</Text>
-
-            {/* Accept and Cancel buttons */}
-            <View style={modalStyles.buttonContainer}>
-              <Pressable style={modalStyles.acceptButton} onPress={() => {/* Handle accept */ }}>
-                <Text style={modalStyles.buttonText} onPress={closeModal}>Decline</Text>
-              </Pressable>
-
-              <Pressable style={modalStyles.cancelButton} >
-                <Text style={modalStyles.buttonText} onPress={() => {
-                  // Handle accept logic here if needed
-                  // Close the modal
-                  navigation.navigate('ArrivedScreen'); // Navigate to ArrivedScreen
-                }}>Accept</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+    
+    {newBook && <NewOrder newBook={newBook}
+      onDeCline={onDeCline}
+      onAccept={()=>onAccept(newBook)}
+      /> }
     </View>
   );
 };
@@ -270,12 +235,34 @@ const styles = StyleSheet.create({
   },
   menu: {
     position: 'absolute',
-    top: 5,
-    left: 10,
+    // top: 5,
+    // left: 10,
     padding: 4,
     borderRadius: 30,
     backgroundColor: '#EE272E',
     zIndex: 1,
     alignItems: 'center',
+  },
+  onlineBtn: {
+    backgroundColor: '#EE272E',
+    position: 'absolute',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    top: 10,
+    width: 100,
+    left: Dimensions.get('window').width / 2 - 50
+  },
+  roundBtn: {
+    position: 'absolute',
+    padding: 4,
+    borderRadius: 30,
+    backgroundColor: '#EE272E',
+
+  },
+  BalnceText: {
+    color: '#fff',
+    fontSize: 16,
   }
 });

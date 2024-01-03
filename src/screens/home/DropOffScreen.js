@@ -79,7 +79,7 @@ const DropOffScreen = () => {
              Tata Ace
             </Text>
           </View>
-          <Icon name="navigation" size={30} color="red" style={{marginLeft:50}} />
+          <Icon name="navigation" size={30} color="red" style={styles.navIcon} />
         </View>
     
         <View style={styles.section3}>
@@ -192,8 +192,23 @@ const styles = StyleSheet.create({
 section3:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 30,
+    marginBottom: 49,
     padding: 20,
     color:'#EE272E'
+},
+navIcon: {
+  marginLeft: 50,
+  // top: 5,
+  // left: 10,
+  padding: 6,
+  borderRadius: 30,
+  backgroundColor: '#fff',
+  // Android
+  elevation: 5,
+  // iOS
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.5,
+  shadowRadius: 2,
 }
 });
