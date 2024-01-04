@@ -12,7 +12,7 @@ import {logout} from '../utils/loginReducer';
 
 
 
-
+//not working code//
 const Home = ({ navigation }) => {
 
     const dispatch = useDispatch()
@@ -22,7 +22,8 @@ const Home = ({ navigation }) => {
     console.log("bearerToken",bearerToken);
 
     const onLogout = async()=>{
-        const url = "http://13.200.75.208:4001/v1/users/logout"
+        const url = "http://13.200.75.208:4001/driver/logout"
+        console.log("hua ");
         try{
             const response = await axios.get(url,
                 {
@@ -111,7 +112,7 @@ const Home = ({ navigation }) => {
                         destination={droplocationCords}
                         apikey={GOOGLE_MAPS_APIKEY}
                         strokeWidth={3}
-                        strokeColor="hotpink"
+                        strokeColor="black"
                         optimizeWaypoints={true}
                         onReady={result => {
                             mapRef.current.fitToCoordinates(result.coordinates, {

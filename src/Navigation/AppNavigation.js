@@ -8,8 +8,12 @@ import OtpScreen from '../authentication/OtpScreen';
 import Onboarding from '../screens/onboardingscreens/Onboarding';
 import Onboard from '../screens/onboardingscreens/Onboard';
 import Welcome from '../screens/welcome/Welcome';
+import HomeScreen from '../home/HomeScreen';
+import ArrivedScreen from '../home/ArrivedScreen';
+import DropOffScreen from '../home/DropOffScreen';
+
 import Splash from '../screens/splash/Splash';
-import Home from '../authentication/Home';
+
 import ChooseLocation from '../authentication/ChooseLocation';
 import ChooseDestination from '../authentication/ChooseDestination';
 
@@ -26,12 +30,13 @@ function AppNavigation() {
         {isLoggedIn ? (
           <>
          
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Home"
             component={Home}
             options={{ headerShown: false }}
-          />
-          <Stack.Screen
+          /> */}
+    
+          {/* <Stack.Screen
               name="ChooseLocation"
               component={ChooseLocation}
               options={{ title: "Back" }}
@@ -40,7 +45,22 @@ function AppNavigation() {
               name="ChooseDestination"
               component={ChooseDestination}
               options={{ title: "Back" }}
-            />
+            /> */}
+            <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArrivedScreen"
+          component={ArrivedScreen}
+          options={{ title: "Back" }}
+        />
+         <Stack.Screen
+          name="DropOffScreen"
+          component={DropOffScreen}
+          options={{ title: "Back" }}
+        />
 
           </>
 

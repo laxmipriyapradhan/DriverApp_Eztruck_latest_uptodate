@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert, Image, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
+import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {loginSuccess, registerSuccess} from '../utils/loginReducer';
 
 const Login = ({navigation}) => {
+
+  const deviceType = Platform.OS == 'android' ? 1 : 2
  
   const dispatch = useDispatch();
   const [numberInput, setNumberInput] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [token, setToken] = useState('')
   
+  const checkToken = async () => {
+
+    const fcmToken = await messaging().getToken();
+    console.log("eeeeeeee", fcmToken);
+
+    setToken(fcmToken)
+    console.log("fcmToken",fcmToken);
+
+  }
+
+  useEffect(() => {
+    checkToken();
+  }, [])
 
 
   const showMyDialog = () => {
@@ -26,14 +43,16 @@ const Login = ({navigation}) => {
   const sendOtp = async () => {
      const customerData = {
       
-      mobile_number: `+91${phoneNumber}`
+      mobile_number: `+91${phoneNumber}`,
+      token: token,
+      device_type: deviceType,
      
     };
 
-
+    console.log("customerData", customerData);
     try {
       const response = await axios.post(
-        'http://13.200.75.208:4001/v1/users/login',
+        'http://13.200.75.208:4001/driver/login',
         customerData,
         {
           headers: {
@@ -45,7 +64,8 @@ const Login = ({navigation}) => {
       // console.log("response",response);
       
       if (response.data){
-        console.log("response.data", response.data);
+        // console.log("response.data", response.data);
+         console.log("token", token);
         dispatch(registerSuccess(response.data))
       
         
@@ -57,7 +77,7 @@ const Login = ({navigation}) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              authkey: "395607ATzxdWwee644b4b4bP1", // replace with your Msg91 key
+              authkey: "395607ATzxdWwee644b4b4bP1", 
             },
           });
           

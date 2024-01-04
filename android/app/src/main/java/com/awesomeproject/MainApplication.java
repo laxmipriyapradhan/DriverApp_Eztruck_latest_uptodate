@@ -1,4 +1,4 @@
-package com.EzTruck;
+package com.EzTruckPartner;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

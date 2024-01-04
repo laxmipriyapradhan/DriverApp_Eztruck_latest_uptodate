@@ -90,7 +90,7 @@ const Registration = ({ navigation }) => {
       }
     const customerData = {
       email: email,
-      customer_name: name ,
+      Name: name ,
       mobile_number: mobileNumber,
       password: password,
     };
@@ -101,7 +101,7 @@ const Registration = ({ navigation }) => {
   try {
     console.log("customerData", customerData);
     const response = await axios.post(
-      'http://13.200.75.208:4001/v1/users/signUp',
+      'http://13.200.75.208:4001/driver/signUp',
       customerData,
       {
         headers: {
@@ -141,9 +141,9 @@ const Registration = ({ navigation }) => {
   
     // Check if the error has a response object
     if (error.response && error.response.status === 400) {
-      // User already exists, provide guidance
+      
       Alert.alert(
-        'User Exists',
+        'Driver Exists',
         'Mobile number already registered. Log in or use another number (e.g., +91 XXXXXXXXXX).',
         [
           {
@@ -166,7 +166,7 @@ const Registration = ({ navigation }) => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register New customer</Text>
+      <Text style={styles.title}>Register New Driver</Text>
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}

@@ -1,4 +1,4 @@
-package com.EzTruck;
+package com.EzTruckPartner;
 import android.os.Bundle;
 
 import org.devio.rn.splashscreen.SplashScreen;

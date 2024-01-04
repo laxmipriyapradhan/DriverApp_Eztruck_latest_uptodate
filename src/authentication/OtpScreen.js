@@ -9,7 +9,7 @@ import { enableLegacyWebImplementation } from 'react-native-gesture-handler';
 const OtpScreen = ({ route,navigation }) => {
 
   const userdata = useSelector(state=>state?.login?.user?.data?.authTokens)
-  console.log("userdata",userdata);
+  // console.log("userdata",userdata);
 
 
   const dispatch = useDispatch();

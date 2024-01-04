@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "281785020847",
-    "project_id": "eztruck-236f3",
-    "storage_bucket": "eztruck-236f3.appspot.com"
+    "project_number": "1096416108396",
+    "project_id": "eztruckpartner-b56c0",
+    "storage_bucket": "eztruckpartner-b56c0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:281785020847:android:deff7d3773acb2023bbf5a",
+        "mobilesdk_app_id": "1:1096416108396:android:6674dab63066b9ff401d49",
         "android_client_info": {
-          "package_name": "com.EzTruck"
+          "package_name": "com.EzTruckPartner"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCykCUr6YT5wwPGY0kRKoFAPrbbj3zoaKM"
+          "current_key": "AIzaSyBzfwKj8H89Yv9GdBUpR-UhS1ppauGnxOw"
         }
       ],
       "services": {
