@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, StyleSheet, Pressable } from "react-native";
 import { Button } from "react-native-paper";
 import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from "@react-navigation/native";
@@ -184,7 +184,6 @@ const Login = ({navigation}) => {
 
     
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login with OTP</Text>
@@ -202,11 +201,10 @@ const Login = ({navigation}) => {
           keyboardType="numeric"
           style={styles.input}
         />
-        <Button
+        <Pressable
           onPress={() => {
             if (numberInput) {
               sendOtp();
-
             } else {
               showMyDialog();
             }
@@ -214,7 +212,7 @@ const Login = ({navigation}) => {
           style={styles.loginButton}
         >
           <Text style={styles.buttonText}>Get OTP</Text>
-        </Button>
+        </Pressable>
       </View>
       <View style={styles.orContainer}>
         <View style={styles.horizontalLine} />
@@ -244,7 +242,6 @@ const Login = ({navigation}) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
